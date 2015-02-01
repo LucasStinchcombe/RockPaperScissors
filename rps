@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import sys
 import random
 import argparse
@@ -20,8 +21,9 @@ relations = (('r','s'), ('p','r'), ('s','p'))
 doodles = {}
 
 
-##### CSV Doodles #####
-with open('/Users/lucasstinchcombe/Documents/Python/rockpaperscissors/doodles.csv', 'rb') as csvfile:
+##### CSV #####
+CSV = os.path.dirname(sys.argv[0]) + '/csv/'
+with open(CSV+'RPSdoodles.csv', 'rb') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         key = line.pop(0)
