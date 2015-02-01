@@ -37,15 +37,6 @@ def main():
     computer = random.choice('rps')
     result(player, computer)
 
-# def result(x, y):
-#     j = tuple([name[i] for i in (x,y)])
-#     if (x, y) in relations:
-#         print "\t%s beats %s \t You Win" % j
-#     elif x != y:
-#         print "\t%s beats %s \t You Lose" % j[::-1]
-#     else:
-#         print "\t%s vs. %s \t Its a Tie" % j
-
 def result(x, y):
     if (x, y) in relations:
         (k1,k2,k,s) = (x.upper(),y,'>>','win')
@@ -54,6 +45,7 @@ def result(x, y):
     else:
         (k1,k2,k,s) = (x,x,'==', 'tie')
     print_doodle(s)
+    print_tags()
     visual_result(k1,k2,k)
 
 def visual_result(k1,k2,k):
@@ -62,11 +54,14 @@ def visual_result(k1,k2,k):
         print doodles[k][i],
         print doodles[k2][i]
 
-
-
 def print_doodle(key):
     for x in doodles[key]:
         print x
+
+def print_tags():
+    print ' '*9 + 'YOU' + ' '*9,
+    print ' '*17,
+    print ' '*6 + 'COMPUTER' + ' '*7
 
 if __name__ == "__main__":
     main()
