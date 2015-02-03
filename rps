@@ -1,17 +1,15 @@
 #!/usr/bin/env python
 import os
 import sys
-import random
 import argparse
+import random
 import csv
+import time
 
 ##### Argument Parser #####
 descr_str = 'The nifty little command line "Rock-Paper-Scissors" program'
 parser = argparse.ArgumentParser(description = descr_str)
-parser.add_argument("throw", choices=['r','p','s'],
-                    help="throw your hand")
 args = parser.parse_args()
-
 
 ##### Lists and Dictionaries #####
 throws = ["Rock", "Paper", "Scissors"]
@@ -19,7 +17,6 @@ symbols = ['r', 'p', 's']
 name = dict(zip(symbols, throws))
 relations = (('r','s'), ('p','r'), ('s','p'))
 doodles = {}
-
 
 ##### CSV #####
 CSV = os.path.dirname(sys.argv[0]) + '/csv/'
@@ -29,15 +26,36 @@ with open(CSV+'RPSdoodles.csv', 'rb') as csvfile:
         key = line.pop(0)
         doodles[key] = line
 
+##### Classes #####
+class Player:
+    def __init__(self):
+        self.Match = []
 
 #######################################
 ################ MAIN #################
 
 def main():
+
+    #initialize Player YOU
+    You = Player()
     # Player and Computer throw and result
-    player = args.throw
+    for i in range(3):
+        print "ROUND",i+1
+        You.Match.append(showdown())
+        while You.Match[i]=='tie':
+            You.Match[i] = showdown()
+
+
+    print You.Match
+
+def showdown():
+    for i in throws:
+        time.sleep(0.6)
+        print '\b' + i + '... ',
+        sys.stdout.flush()
+    player = raw_input()
     computer = random.choice('rps')
-    result(player, computer)
+    return result(player, computer)
 
 def result(x, y):
     if (x, y) in relations:
@@ -49,6 +67,7 @@ def result(x, y):
     print_doodle(s)
     print_tags()
     visual_result(k1,k2,k)
+    return s
 
 def visual_result(k1,k2,k):
     for i in range(len(doodles[k1])):
