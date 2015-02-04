@@ -29,7 +29,12 @@ with open(CSV+'RPSdoodles.csv', 'rb') as csvfile:
 ##### Classes #####
 class Player:
     def __init__(self):
-        self.Match = []
+        self.Rounds = []
+
+    def Round_Info(self,i):
+        div = "-"*15
+        info = div + "\nROUND "+ repr(i) + "\n" + div
+        return info
 
 #######################################
 ################ MAIN #################
@@ -38,20 +43,19 @@ def main():
 
     #initialize Player YOU
     You = Player()
+    div = "-"*15
     # Player and Computer throw and result
     for i in range(3):
-        print "ROUND",i+1
-        You.Match.append(showdown())
-        while You.Match[i]=='tie':
-            You.Match[i] = showdown()
-
-
-    print You.Match
+        print You.Round_Info(i+1)
+        You.Rounds.append(showdown())
+        while You.Rounds[i]=='tie':
+            You.Rounds[i] = showdown()
+    print You.Rounds
 
 def showdown():
     for i in throws:
-        time.sleep(0.6)
-        print '\b' + i + '... ',
+        time.sleep(0.5)
+        print '\t' + i + ' ->',
         sys.stdout.flush()
     player = raw_input()
     computer = random.choice('rps')
@@ -64,7 +68,6 @@ def result(x, y):
         (k1,k2,k,s) = (x,y.upper(),'<<','lose')
     else:
         (k1,k2,k,s) = (x,x,'==', 'tie')
-    print_doodle(s)
     print_tags()
     visual_result(k1,k2,k)
     return s
@@ -80,7 +83,7 @@ def print_doodle(key):
         print x
 
 def print_tags():
-    print ' '*9 + 'YOU' + ' '*9,
+    print '\n\n'+' '*9 + 'YOU' + ' '*9,
     print ' '*17,
     print ' '*6 + 'COMPUTER' + ' '*7
 
