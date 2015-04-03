@@ -31,10 +31,16 @@ class Player:
     def __init__(self):
         self.Rounds = []
 
-    def Round_Info(self,i):
+    def round_info(self,i):
         div = "-"*15
         info = div + "\nROUND "+ repr(i) + "\n" + div
         return info
+
+    def result(self):
+        if self.Rounds.count('win')>1:
+            return 'win'
+        else:
+            return 'lose'
 
 #######################################
 ################ MAIN #################
@@ -43,14 +49,17 @@ def main():
 
     #initialize Player YOU
     You = Player()
-    div = "-"*15
+
     # Player and Computer throw and result
     for i in range(3):
-        print You.Round_Info(i+1)
+        print You.round_info(i+1)
         You.Rounds.append(showdown())
         while You.Rounds[i]=='tie':
             You.Rounds[i] = showdown()
-    print You.Rounds
+    print "\n"
+    print "=================="
+    print "\t\tYou " + You.result()
+    print "=================="
 
 def showdown():
     for i in throws:
