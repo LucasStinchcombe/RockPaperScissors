@@ -72,6 +72,6 @@ Run program and type either 'r', 'p', or 's' for each round
 
 
 
-    ==================
+    =======================
     		You lose
-    ==================
+    =======================
