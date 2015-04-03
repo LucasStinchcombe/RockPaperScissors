@@ -4,6 +4,7 @@ Pretty self-explanatory, its Rock Paper Scissors with some doodles.
 Run program and type either 'r', 'p', or 's' for each round
 
 *Here's me Losing:*
+
     ---------------
     ROUND 1
     ---------------
